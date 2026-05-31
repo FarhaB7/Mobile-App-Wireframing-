@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile App Wireframes — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f2ee;
+    --grid: #e0dbd4;
+    --accent: #d4502a;
+    --accent2: #2a6dd4;
+    --muted: #8c8580;
+    --wire: #c8c2bc;
+    --screen: #ffffff;
+    --screen-border: #2a2825;
+    --annotation: #2a6dd4;
+    --highlight: #f5d84a;
+    --tag-bg: #0f0e0d;
+    --tag-fg: #f5f2ee;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    border-bottom: 2px solid var(--ink);
+    padding: 24px 48px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .site-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .site-header .meta {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--ink);
+    background: var(--paper);
+    overflow-x: auto;
+    padding: 0 48px;
+  }
+  .nav-tab {
+    padding: 14px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--ink); }
+  .nav-tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; padding: 48px; }
+  .section.active { display: block; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+  /* ── CARDS ── */
+  .card {
+    border: 1.5px solid var(--ink);
+    background: var(--screen);
+    padding: 28px;
+  }
+  .card-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .card p { font-size: 12px; line-height: 1.7; color: #444; }
+
+  /* ── USER RESEARCH ── */
+  .research-finding {
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    background: var(--screen);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1.5px solid var(--ink);
+    border-left: 4px solid var(--accent);
+  }
+  .finding-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 40px;
+  }
+  .finding-text { font-size: 13px; line-height: 1.6; }
+  .finding-text strong { font-weight: 500; display: block; margin-bottom: 4px; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-box {
+    border: 1.5px solid var(--ink);
+    padding: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--highlight);
+  }
+  .stat-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; opacity: 0.7; }
+
+  /* ── PERSONA CARDS ── */
+  .persona {
+    border: 1.5px solid var(--ink);
+    background: var(--screen);
+    overflow: hidden;
+  }
+  .persona-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .persona-avatar {
+    width: 52px;
+    height: 52px;
+    border: 2px solid var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .persona-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .persona-role { font-size: 11px; opacity: 0.6; margin-top: 2px; }
+  .persona-body { padding: 20px 24px; }
+  .persona-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
+  .persona-key {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 72px;
+    padding-top: 1px;
+  }
+  .persona-val { font-size: 12px; line-height: 1.5; }
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    font-size: 9px;
+    padding: 3px 8px;
+    letter-spacing: 0.5px;
+    margin: 2px 2px 2px 0;
+  }
+  .tag.outlined {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .pain-tag {
+    background: #fde8e2;
+    color: #a0280a;
+    border: 1.5px solid #f5c0b0;
+    font-size: 9px;
+    display: inline-block;
+    padding: 3px 8px;
+    margin: 2px 2px 2px 0;
+  }
+  .goal-tag {
+    background: #e2f0e8;
+    color: #1a5c30;
+    border: 1.5px solid #b0d8c0;
+    font-size: 9px;
+    display: inline-block;
+    padding: 3px 8px;
+    margin: 2px 2px 2px 0;
+  }
+
+  /* ── USER FLOW ── */
+  .flow-wrapper {
+    overflow-x: auto;
+    padding-bottom: 16px;
+  }
+  .flow-strip {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: max-content;
+    margin-bottom: 32px;
+  }
+  .flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .flow-box {
+    border: 2px solid var(--ink);
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    background: var(--screen);
+    min-width: 100px;
+    position: relative;
+  }
+  .flow-box.start {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 0;
+  }
+  .flow-box.decision {
+    background: #fff8e0;
+    border-color: var(--accent2);
+    transform: rotate(0deg);
+  }
+  .flow-box.action {
+    background: #e8f0fe;
+    border-color: var(--accent2);
+  }
+  .flow-box.end {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .flow-box.screen-box {
+    background: #f0f8f0;
+    border-color: #2a8040;
+  }
+  .flow-step-num {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    margin-bottom: 24px;
+  }
+  .flow-arrow::after {
+    content: '→';
+    font-size: 20px;
+    color: var(--ink);
+    font-weight: 300;
+  }
+  .flow-label-yes, .flow-label-no {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .flow-label-yes { color: #1a5c30; }
+  .flow-label-no { color: #a0280a; }
+
+  /* ── WIREFRAME PHONES ── */
+  .wireframe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-top: 8px;
+  }
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .phone-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+  .phone-frame {
+    width: 180px;
+    border: 3px solid var(--screen-border);
+    border-radius: 28px;
+    background: var(--screen);
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+    position: relative;
+  }
+  .phone-notch {
+    background: var(--screen-border);
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .notch-cam {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #333;
+    border: 1.5px solid #555;
+  }
+  .phone-screen {
+    padding: 8px;
+    min-height: 320px;
+    background: #fafafa;
+  }
+
+  /* Wire components */
+  .wf-statusbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 4px;
+    margin-bottom: 6px;
+  }
+  .wf-status-dot { width: 24px; height: 5px; background: var(--wire); border-radius: 2px; }
+  .wf-status-icons { display: flex; gap: 3px; }
+  .wf-status-icon { width: 12px; height: 5px; background: var(--wire); border-radius: 1px; }
+
+  .wf-header {
+    background: var(--ink);
+    margin: 0 -8px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .wf-header-title { width: 60px; height: 8px; background: var(--paper); border-radius: 1px; }
+  .wf-header-icon { width: 14px; height: 14px; background: var(--paper); opacity: 0.5; border-radius: 2px; }
+
+  .wf-rect { background: var(--wire); border-radius: 2px; }
+  .wf-circle { background: var(--wire); border-radius: 50%; }
+  .wf-line { background: var(--wire); border-radius: 1px; margin-bottom: 4px; }
+
+  .wf-img-placeholder {
+    background: var(--wire);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wf-img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4px,
+      rgba(0,0,0,0.06) 4px,
+      rgba(0,0,0,0.06) 8px
+    );
+  }
+  .wf-img-placeholder span {
+    font-size: 9px;
+    color: #999;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .wf-btn {
+    background: var(--ink);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+  .wf-btn span { color: var(--paper); font-size: 8px; letter-spacing: 1px; text-transform: uppercase; }
+  .wf-btn.outline {
+    background: transparent;
+    border: 1.5px solid var(--ink);
+  }
+  .wf-btn.outline span { color: var(--ink); }
+
+  .wf-card {
+    border: 1px solid var(--wire);
+    border-radius: 3px;
+    padding: 6px;
+    margin-bottom: 6px;
+    background: #fff;
+  }
+  .wf-tab-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 6px 0 4px;
+    border-top: 1.5px solid var(--wire);
+    margin: 0 -8px;
+    background: #fff;
+  }
+  .wf-tab { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .wf-tab-icon { width: 14px; height: 14px; background: var(--wire); border-radius: 2px; }
+  .wf-tab-icon.active { background: var(--ink); }
+  .wf-tab-dot { width: 20px; height: 3px; background: var(--wire); border-radius: 1px; }
+  .wf-tab-dot.active { background: var(--ink); }
+
+  .wf-input {
+    border: 1.5px solid var(--wire);
+    border-radius: 2px;
+    height: 22px;
+    margin-bottom: 6px;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+  }
+  .wf-input span { font-size: 7px; color: #bbb; letter-spacing: 0.5px; }
+
+  .wf-avatar { background: var(--wire); }
+
+  .wf-list-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    border-bottom: 1px solid #f0eded;
+  }
+
+  .annotation {
+    font-size: 10px;
+    color: var(--annotation);
+    font-style: italic;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  /* ── DESIGN PROCESS ── */
+  .process-timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+  .process-timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--ink);
+  }
+  .process-step {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .process-step::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+  }
+  .process-step.done::before {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .process-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .process-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .process-desc { font-size: 12px; line-height: 1.7; color: #555; max-width: 600px; }
+  .process-output {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1.5px solid var(--grid);
+    margin: 40px 0;
+  }
+
+  h2.sub { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .site-header, .nav-tabs, .section { padding-left: 20px; padding-right: 20px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .wireframe-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .wireframe-grid { grid-template-columns: 1fr 1fr; }
+    .phone-frame { width: 140px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>FitFlow — Mobile App Wireframes</h1>
+  <span class="meta">UX Design Document · v1.0</span>
+</header>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="show('research')">01 Research</button>
+  <button class="nav-tab" onclick="show('personas')">02 Personas</button>
+  <button class="nav-tab" onclick="show('flows')">03 User Flows</button>
+  <button class="nav-tab" onclick="show('wireframes')">04 Wireframes</button>
+  <button class="nav-tab" onclick="show('process')">05 Design Thinking</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     01  USER RESEARCH
+════════════════════════════════════════════ -->
+<section class="section active" id="research">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">User Research</h2>
+  <p class="section-desc">We conducted a mixed-methods study: 12 in-depth interviews + 84 survey responses targeting adults aged 22–45 who want to build or maintain fitness habits. The app concept: a personalised fitness tracking app called <strong>FitFlow</strong>.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-num">84</div>
+      <div class="stat-label">Survey responses</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">12</div>
+      <div class="stat-label">User interviews</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">67%</div>
+      <div class="stat-label">Quit apps within 2 wks</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">4.2h</div>
+      <div class="stat-label">Avg daily phone time</div>
+    </div>
+  </div>
+
+  <h2 class="sub">Key Findings</h2>
+  <div class="research-finding">
+    <div class="finding-num">01</div>
+    <div class="finding-text">
+      <strong>Motivation collapses after 10 days</strong>
+      Users report strong initial enthusiasm but lose motivation when they miss a single session. Apps that show "streak broken" imagery accelerate abandonment.
+    </div>
+  </div>
+  <div class="research-finding">
+    <div class="finding-num">02</div>
+    <div class="finding-text">
+      <strong>Onboarding friction is critical</strong>
+      78% of surveyed users abandoned a fitness app due to lengthy onboarding. The sweet spot for setup time is under 90 seconds.
+    </div>
+  </div>
+  <div class="research-finding">
+    <div class="finding-num">03</div>
+    <div class="finding-text">
+      <strong>Progress visibility drives retention</strong>
+      Users who could see weekly improvement graphs (even marginal ones) were 3× more likely to return the following week.
+    </div>
+  </div>
+  <div class="research-finding">
+    <div class="finding-num">04</div>
+    <div class="finding-text">
+      <strong>Scheduling conflict is the #1 drop-off reason</strong>
+      Life gets in the way. Users want intelligent rescheduling, not punishment for missing a day.
+    </div>
+  </div>
+  <div class="research-finding">
+    <div class="finding-num">05</div>
+    <div class="finding-text">
+      <strong>Social pressure is a double-edged sword</strong>
+      41% love accountability partners; 38% find social features anxiety-inducing. Opt-in social is essential.
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h2 class="sub">Competitive Analysis</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-label">Competitor A</div>
+      <h3>Nike Training Club</h3>
+      <p>Excellent video library. Weak personalisation. No adaptive scheduling. Overwhelming content volume for beginners.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Competitor B</div>
+      <h3>MyFitnessPal</h3>
+      <p>Strong nutrition tracking. Fitness planning is bolted-on. Cluttered UI. Paywall frustration common in reviews.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Opportunity</div>
+      <h3>FitFlow Gap</h3>
+      <p>Adaptive scheduling + forgiving streak design + minimal onboarding = the underserved middle ground.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     02  PERSONAS
+════════════════════════════════════════════ -->
+<section class="section" id="personas">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">User Personas</h2>
+  <p class="section-desc">Three primary personas distilled from research data, representing the core user spectrum of FitFlow.</p>
+
+  <div class="grid-3" style="margin-bottom: 40px;">
+
+    <div class="persona">
+      <div class="persona-header">
+        <div class="persona-avatar">🏃</div>
+        <div>
+          <div class="persona-name">Maya Chen</div>
+          <div class="persona-role">The Busy Professional · 31</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <span class="persona-key">Job</span>
+          <span class="persona-val">Product Manager, tech startup</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Goal</span>
+          <span class="persona-val">30-min workouts 4×/week that fit around meetings</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Pains</span>
+          <div>
+            <span class="pain-tag">Unpredictable schedule</span>
+            <span class="pain-tag">Guilt when skipping</span>
+            <span class="pain-tag">Too many choices</span>
+          </div>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Needs</span>
+          <div>
+            <span class="goal-tag">Smart rescheduling</span>
+            <span class="goal-tag">Quick-start workouts</span>
+            <span class="goal-tag">Progress at a glance</span>
+          </div>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Tech</span>
+          <span class="persona-val">iPhone 15 Pro, Apple Watch Series 9</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Quote</span>
+          <span class="persona-val" style="font-style:italic; color:#555">"I don't need 200 workouts. I need the right 5, scheduled around my life."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona">
+      <div class="persona-header" style="background: #1a3a6e;">
+        <div class="persona-avatar">💪</div>
+        <div>
+          <div class="persona-name">James Okafor</div>
+          <div class="persona-role">The Motivated Beginner · 26</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <span class="persona-key">Job</span>
+          <span class="persona-val">Graduate student, architecture</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Goal</span>
+          <span class="persona-val">Build a habit from scratch, lose 15 lbs over 6 months</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Pains</span>
+          <div>
+            <span class="pain-tag">Doesn't know where to start</span>
+            <span class="pain-tag">Gets intimidated</span>
+            <span class="pain-tag">Loses streaks</span>
+          </div>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Needs</span>
+          <div>
+            <span class="goal-tag">Guided beginner plan</span>
+            <span class="goal-tag">Forgiving streak logic</span>
+            <span class="goal-tag">Encouraging tone</span>
+          </div>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Tech</span>
+          <span class="persona-val">Android (Samsung S24), no wearable</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Quote</span>
+          <span class="persona-val" style="font-style:italic; color:#555">"I've started and quit 4 fitness apps. I want one that doesn't make me feel like a failure."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona">
+      <div class="persona-header" style="background: #2a5c20;">
+        <div class="persona-avatar">🧘</div>
+        <div>
+          <div class="persona-name">Sarah Kim</div>
+          <div class="persona-role">The Wellness Optimizer · 38</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <span class="persona-key">Job</span>
+          <span class="persona-val">Freelance designer + parent of 2</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Goal</span>
+          <span class="persona-val">Mix of strength, yoga, and recovery tracking</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Pains</span>
+          <div>
+            <span class="pain-tag">Apps silo fitness types</span>
+            <span class="pain-tag">Needs sleep + recovery</span>
+            <span class="pain-tag">Hates ads</span>
+          </div>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Needs</span>
+          <div>
+            <span class="goal-tag">Holistic tracking</span>
+            <span class="goal-tag">Flexible intensity</span>
+            <span class="goal-tag">Clean, calm UI</span>
+          </div>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Tech</span>
+          <span class="persona-val">iPhone 14, Oura ring integration</span>
+        </div>
+        <div class="persona-row">
+          <span class="persona-key">Quote</span>
+          <span class="persona-val" style="font-style:italic; color:#555">"Fitness isn't just workouts. It's sleep, stress, and how my body feels that day."</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     03  USER FLOWS
+════════════════════════════════════════════ -->
+<section class="section" id="flows">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">User Flows</h2>
+  <p class="section-desc">Critical path flows for FitFlow's core actions. These define the navigational architecture before visual design begins.</p>
+
+  <h2 class="sub">Flow A — First-Time Onboarding</h2>
+  <div class="flow-wrapper">
+    <div class="flow-strip">
+      <div class="flow-node">
+        <span class="flow-step-num">Entry</span>
+        <div class="flow-box start">App Launch</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Step 1</span>
+        <div class="flow-box screen-box">Welcome Screen</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Step 2</span>
+        <div class="flow-box action">Quick Goal Survey<br><span style="font-size:9px;color:#888">(3 questions)</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Step 3</span>
+        <div class="flow-box action">Set Weekly Target<br><span style="font-size:9px;color:#888">(days + duration)</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Step 4</span>
+        <div class="flow-box action">Create Account<br><span style="font-size:9px;color:#888">(optional)</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Done</span>
+        <div class="flow-box end">Dashboard</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub">Flow B — Start a Workout</h2>
+  <div class="flow-wrapper">
+    <div class="flow-strip">
+      <div class="flow-node">
+        <span class="flow-step-num">Start</span>
+        <div class="flow-box start">Dashboard</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Tap</span>
+        <div class="flow-box screen-box">Today's Plan</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Choose</span>
+        <div class="flow-box decision">Use suggested<br>workout?</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Yes</span>
+        <div class="flow-box screen-box">Workout Preview</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Confirm</span>
+        <div class="flow-box action">Start Timer + Exercises</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Finish</span>
+        <div class="flow-box end">Summary + Streak</div>
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center; margin-top: -16px; padding-left: 420px;">
+      <span class="flow-label-no" style="font-size:10px;">↓ No</span>
+    </div>
+    <div class="flow-strip" style="padding-left: 420px; margin-top: 4px;">
+      <div class="flow-node">
+        <div class="flow-box screen-box">Browse Library</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <div class="flow-box action">Select Custom Workout</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub">Flow C — Missed Session Recovery</h2>
+  <div class="flow-wrapper">
+    <div class="flow-strip">
+      <div class="flow-node">
+        <span class="flow-step-num">Trigger</span>
+        <div class="flow-box start">Missed Workout</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Notification</span>
+        <div class="flow-box screen-box">Gentle Push<br><span style="font-size:9px;color:#888">No guilt language</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Open</span>
+        <div class="flow-box action">Reschedule Prompt</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Action</span>
+        <div class="flow-box decision">Reschedule<br>or Skip?</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Reschedule</span>
+        <div class="flow-box screen-box">Pick New Day</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <span class="flow-step-num">Result</span>
+        <div class="flow-box end">Streak Protected<br><span style="font-size:9px">✓ Plan updated</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     04  WIREFRAMES
+════════════════════════════════════════════ -->
+<section class="section" id="wireframes">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">Low-Fidelity Wireframes</h2>
+  <p class="section-desc">Structural wireframes showing layout, hierarchy and interaction zones. No colour, no final copy — just bones. Grey boxes represent image/content placeholders; dark boxes are primary actions.</p>
+
+  <div class="wireframe-grid">
+
+    <!-- ONBOARDING -->
+    <div class="phone-wrap">
+      <div class="phone-label">01 · Onboarding / Welcome</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="notch-cam"></div></div>
+        <div class="phone-screen">
+          <div class="wf-statusbar">
+            <div class="wf-status-dot"></div>
+            <div class="wf-status-icons">
+              <div class="wf-status-icon"></div>
+              <div class="wf-status-icon"></div>
+              <div class="wf-status-icon"></div>
+            </div>
+          </div>
+          <div class="wf-img-placeholder" style="height:130px; margin-bottom: 14px;"><span>Hero Illustration</span></div>
+          <div class="wf-line" style="height:14px; width:80%; margin: 0 auto 6px;"></div>
+          <div class="wf-line" style="height:8px; width:65%; margin: 0 auto 4px;"></div>
+          <div class="wf-line" style="height:8px; width:55%; margin: 0 auto 20px;"></div>
+          <div class="wf-btn" style="height:32px; margin-bottom: 8px;"><span>Get Started</span></div>
+          <div class="wf-btn outline" style="height:28px;"><span>Log In</span></div>
+          <div style="height: 20px;"></div>
+          <div style="display:flex; justify-content:center; gap: 4px; margin-top:4px;">
+            <div style="width:16px; height:4px; background:var(--ink); border-radius:2px;"></div>
+            <div style="width:6px; height:4px; background:var(--wire); border-radius:2px;"></div>
+            <div style="width:6px; height:4px; background:var(--wire); border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">Entry point · CTA prominent</div>
+    </div>
+
+    <!-- GOAL SURVEY -->
+    <div class="phone-wrap">
+      <div class="phone-label">02 · Quick Goal Survey</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="notch-cam"></div></div>
+        <div class="phone-screen">
+          <div class="wf-statusbar">
+            <div class="wf-status-dot"></div>
+            <div class="wf-status-icons"><div class="wf-status-icon"></div><div class="wf-status-icon"></div></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:14px;">
+            <div style="width:12px;height:12px;background:var(--wire);border-radius:1px;"></div>
+            <div style="display:flex;gap:3px;">
+              <div style="width:30px;height:3px;background:var(--ink);border-radius:1px;"></div>
+              <div style="width:30px;height:3px;background:var(--wire);border-radius:1px;"></div>
+              <div style="width:30px;height:3px;background:var(--wire);border-radius:1px;"></div>
+            </div>
+            <div style="width:12px;height:12px;"></div>
+          </div>
+          <div class="wf-line" style="height:10px; width:70%; margin-bottom: 8px;"></div>
+          <div class="wf-line" style="height:7px; width:55%; margin-bottom:16px;"></div>
+          <!-- Option tiles -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-bottom:10px;">
+            <div style="border:1.5px solid var(--ink);padding:8px 5px;background:#fff;text-align:center;">
+              <div style="font-size:14px;margin-bottom:3px;">🏋️</div>
+              <div style="height:6px;background:var(--wire);border-radius:1px;width:60%;margin:0 auto;"></div>
+            </div>
+            <div style="border:1.5px solid var(--accent);padding:8px 5px;background:#fff5f2;text-align:center;">
+              <div style="font-size:14px;margin-bottom:3px;">🏃</div>
+              <div style="height:6px;background:var(--wire);border-radius:1px;width:60%;margin:0 auto;"></div>
+            </div>
+            <div style="border:1.5px solid var(--wire);padding:8px 5px;background:#fff;text-align:center;">
+              <div style="font-size:14px;margin-bottom:3px;">🧘</div>
+              <div style="height:6px;background:var(--wire);border-radius:1px;width:60%;margin:0 auto;"></div>
+            </div>
+            <div style="border:1.5px solid var(--wire);padding:8px 5px;background:#fff;text-align:center;">
+              <div style="font-size:14px;margin-bottom:3px;">⚡</div>
+              <div style="height:6px;background:var(--wire);border-radius:1px;width:60%;margin:0 auto;"></div>
+            </div>
+          </div>
+          <div class="wf-btn" style="height:28px; margin-top:8px;"><span>Continue</span></div>
+        </div>
+      </div>
+      <div class="annotation">Step 1 of 3 · Tile selection</div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="phone-wrap">
+      <div class="phone-label">03 · Home Dashboard</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="notch-cam"></div></div>
+        <div class="phone-screen">
+          <div class="wf-statusbar">
+            <div class="wf-status-dot"></div>
+            <div class="wf-status-icons"><div class="wf-status-icon"></div><div class="wf-status-icon"></div></div>
+          </div>
+          <!-- Top bar -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div>
+              <div style="height:6px;width:50px;background:var(--wire);border-radius:1px;margin-bottom:3px;"></div>
+              <div style="height:9px;width:80px;background:var(--ink);border-radius:1px;"></div>
+            </div>
+            <div class="wf-avatar wf-circle" style="width:26px;height:26px;"></div>
+          </div>
+          <!-- Streak bar -->
+          <div style="background:#f0f0f0;border-radius:3px;padding:6px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="height:7px;width:50px;background:var(--wire);border-radius:1px;"></div>
+            <div style="display:flex;gap:3px;">
+              <div style="width:10px;height:10px;background:var(--accent);border-radius:50%;"></div>
+              <div style="width:10px;height:10px;background:var(--accent);border-radius:50%;"></div>
+              <div style="width:10px;height:10px;background:var(--accent);border-radius:50%;"></div>
+              <div style="width:10px;height:10px;background:var(--wire);border-radius:50%;"></div>
+              <div style="width:10px;height:10px;background:var(--wire);border-radius:50%;"></div>
+            </div>
+          </div>
+          <!-- Today card -->
+          <div class="wf-img-placeholder" style="height:80px; margin-bottom:8px;"><span>Today's Workout Card</span></div>
+          <!-- Quick stats -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px;">
+            <div style="border:1px solid var(--wire);padding:5px;text-align:center;">
+              <div style="height:12px;background:var(--wire);border-radius:1px;margin-bottom:3px;"></div>
+              <div style="height:6px;background:var(--wire);border-radius:1px;width:60%;margin:0 auto;"></div>
+            </div>
+            <div style="border:1px solid var(--wire);padding:5px;text-align:center;">
+              <div style="height:12px;background:var(--wire);border-radius:1px;margin-bottom:3px;"></div>
+              <div style="height:6px;background:var(--wire);border-radius:1px;width:60%;margin:0 auto;"></div>
+            </div>
+            <div style="border:1px solid var(--wire);padding:5px;text-align:center;">
+              <div style="height:12px;background:var(--wire);border-radius:1px;margin-bottom:3px;"></div>
+              <div style="height:6px;background:var(--wire);border-radius:1px;width:60%;margin:0 auto;"></div>
+            </div>
+          </div>
+          <!-- Recent list -->
+          <div style="height:6px;width:55px;background:var(--wire);border-radius:1px;margin-bottom:5px;"></div>
+          <div class="wf-list-item">
+            <div class="wf-rect" style="width:18px;height:18px;border-radius:2px;"></div>
+            <div style="flex:1"><div class="wf-line" style="height:6px;width:70%;margin-bottom:2px;"></div><div class="wf-line" style="height:5px;width:40%;"></div></div>
+          </div>
+          <div class="wf-list-item">
+            <div class="wf-rect" style="width:18px;height:18px;border-radius:2px;"></div>
+            <div style="flex:1"><div class="wf-line" style="height:6px;width:60%;margin-bottom:2px;"></div><div class="wf-line" style="height:5px;width:35%;"></div></div>
+          </div>
+          <div class="wf-tab-bar">
+            <div class="wf-tab"><div class="wf-tab-icon active"></div><div class="wf-tab-dot active"></div></div>
+            <div class="wf-tab"><div class="wf-tab-icon"></div><div class="wf-tab-dot"></div></div>
+            <div class="wf-tab"><div class="wf-tab-icon"></div><div class="wf-tab-dot"></div></div>
+            <div class="wf-tab"><div class="wf-tab-icon"></div><div class="wf-tab-dot"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">Primary screen · 4-tab nav</div>
+    </div>
+
+    <!-- WORKOUT PREVIEW -->
+    <div class="phone-wrap">
+      <div class="phone-label">04 · Workout Preview</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="notch-cam"></div></div>
+        <div class="phone-screen">
+          <div class="wf-statusbar">
+            <div class="wf-status-dot"></div>
+            <div class="wf-status-icons"><div class="wf-status-icon"></div><div class="wf-status-icon"></div></div>
+          </div>
+          <div class="wf-header">
+            <div style="width:14px;height:14px;background:var(--paper);opacity:0.5;border-radius:2px;"></div>
+            <div class="wf-header-title"></div>
+            <div class="wf-header-icon"></div>
+          </div>
+          <!-- Hero -->
+          <div class="wf-img-placeholder" style="height:70px;margin-bottom:8px;"><span>Workout Banner</span></div>
+          <!-- Meta row -->
+          <div style="display:flex;gap:6px;margin-bottom:8px;">
+            <div style="background:#f0f0f0;padding:4px 8px;border-radius:2px;height:16px;width:50px;"></div>
+            <div style="background:#f0f0f0;padding:4px 8px;border-radius:2px;height:16px;width:40px;"></div>
+            <div style="background:#f0f0f0;padding:4px 8px;border-radius:2px;height:16px;width:45px;"></div>
+          </div>
+          <!-- Exercise list -->
+          <div style="height:6px;width:60px;background:var(--wire);border-radius:1px;margin-bottom:6px;"></div>
+          <div class="wf-list-item">
+            <div class="wf-rect" style="width:28px;height:28px;border-radius:2px;"></div>
+            <div style="flex:1">
+              <div class="wf-line" style="height:7px;width:75%;margin-bottom:3px;"></div>
+              <div class="wf-line" style="height:5px;width:45%;"></div>
+            </div>
+            <div style="height:7px;width:20px;background:var(--wire);border-radius:1px;"></div>
+          </div>
+          <div class="wf-list-item">
+            <div class="wf-rect" style="width:28px;height:28px;border-radius:2px;"></div>
+            <div style="flex:1">
+              <div class="wf-line" style="height:7px;width:65%;margin-bottom:3px;"></div>
+              <div class="wf-line" style="height:5px;width:40%;"></div>
+            </div>
+            <div style="height:7px;width:20px;background:var(--wire);border-radius:1px;"></div>
+          </div>
+          <div class="wf-list-item">
+            <div class="wf-rect" style="width:28px;height:28px;border-radius:2px;"></div>
+            <div style="flex:1">
+              <div class="wf-line" style="height:7px;width:70%;margin-bottom:3px;"></div>
+              <div class="wf-line" style="height:5px;width:50%;"></div>
+            </div>
+            <div style="height:7px;width:20px;background:var(--wire);border-radius:1px;"></div>
+          </div>
+          <div style="height:10px;"></div>
+          <div class="wf-btn" style="height:30px; margin:0 0 4px;"><span>Start Workout</span></div>
+          <div class="wf-btn outline" style="height:24px;"><span>Reschedule</span></div>
+        </div>
+      </div>
+      <div class="annotation">Detail view · Start or reschedule</div>
+    </div>
+
+    <!-- ACTIVE WORKOUT -->
+    <div class="phone-wrap">
+      <div class="phone-label">05 · Active Workout</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="notch-cam"></div></div>
+        <div class="phone-screen" style="background:#0f0e0d;">
+          <div class="wf-statusbar">
+            <div class="wf-status-dot" style="background:#444;"></div>
+            <div class="wf-status-icons"><div class="wf-status-icon" style="background:#444;"></div><div class="wf-status-icon" style="background:#444;"></div></div>
+          </div>
+          <!-- Exercise name -->
+          <div style="height:8px;width:80%;background:#333;border-radius:1px;margin:6px auto 4px;"></div>
+          <div style="height:6px;width:50%;background:#333;border-radius:1px;margin:0 auto 14px;"></div>
+          <!-- Big timer circle -->
+          <div style="width:90px;height:90px;border-radius:50%;border:4px solid var(--accent);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;">
+              <div style="height:18px;width:40px;background:#444;border-radius:2px;margin-bottom:3px;"></div>
+              <div style="height:5px;width:20px;background:#333;border-radius:1px;margin:0 auto;"></div>
+            </div>
+          </div>
+          <!-- Set info -->
+          <div style="display:flex;justify-content:center;gap:16px;margin-bottom:12px;">
+            <div style="text-align:center;">
+              <div style="height:14px;width:24px;background:#444;border-radius:1px;margin-bottom:3px;"></div>
+              <div style="height:5px;width:20px;background:#333;border-radius:1px;"></div>
+            </div>
+            <div style="text-align:center;">
+              <div style="height:14px;width:24px;background:#444;border-radius:1px;margin-bottom:3px;"></div>
+              <div style="height:5px;width:20px;background:#333;border-radius:1px;"></div>
+            </div>
+          </div>
+          <!-- Controls -->
+          <div style="display:flex;gap:8px;margin-bottom:8px;">
+            <div style="flex:1;height:36px;border:1.5px solid #444;display:flex;align-items:center;justify-content:center;">
+              <div style="width:12px;height:12px;background:#444;border-radius:50%;"></div>
+            </div>
+            <div style="flex:2;height:36px;background:var(--accent);display:flex;align-items:center;justify-content:center;">
+              <div style="height:6px;width:40px;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
+            </div>
+            <div style="flex:1;height:36px;border:1.5px solid #444;display:flex;align-items:center;justify-content:center;">
+              <div style="width:12px;height:12px;background:#444;border-radius:1px;"></div>
+            </div>
+          </div>
+          <!-- Upcoming -->
+          <div style="height:5px;width:50px;background:#333;border-radius:1px;margin-bottom:5px;"></div>
+          <div style="display:flex;gap:4px;">
+            <div style="width:36px;height:36px;background:#1a1a1a;border-radius:2px;border:1px solid #333;"></div>
+            <div style="width:36px;height:36px;background:#1a1a1a;border-radius:2px;border:1px solid #333;"></div>
+            <div style="width:36px;height:36px;background:#1a1a1a;border-radius:2px;border:1px dashed #333;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">Dark mode · Timer focus view</div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="phone-wrap">
+      <div class="phone-label">06 · Progress &amp; Stats</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="notch-cam"></div></div>
+        <div class="phone-screen">
+          <div class="wf-statusbar">
+            <div class="wf-status-dot"></div>
+            <div class="wf-status-icons"><div class="wf-status-icon"></div><div class="wf-status-icon"></div></div>
+          </div>
+          <div class="wf-header">
+            <div class="wf-header-title"></div>
+            <div class="wf-header-icon"></div>
+          </div>
+          <!-- Period selector -->
+          <div style="display:flex;gap:0;margin-bottom:10px;">
+            <div style="flex:1;padding:5px;background:var(--ink);text-align:center;"><div style="height:6px;background:var(--paper);border-radius:1px;width:30px;margin:0 auto;"></div></div>
+            <div style="flex:1;padding:5px;background:#f0f0f0;text-align:center;"><div style="height:6px;background:var(--wire);border-radius:1px;width:30px;margin:0 auto;"></div></div>
+            <div style="flex:1;padding:5px;background:#f0f0f0;text-align:center;"><div style="height:6px;background:var(--wire);border-radius:1px;width:30px;margin:0 auto;"></div></div>
+          </div>
+          <!-- Bar chart placeholder -->
+          <div class="wf-img-placeholder" style="height:80px;margin-bottom:8px;"><span>Activity Bar Chart</span></div>
+          <!-- Ring stats -->
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <div style="border:1px solid var(--wire);padding:6px;flex:1;text-align:center;">
+              <div style="width:30px;height:30px;border-radius:50%;border:4px solid var(--accent);margin:0 auto 4px;"></div>
+              <div style="height:5px;background:var(--wire);border-radius:1px;width:40%;margin:0 auto;"></div>
+            </div>
+            <div style="border:1px solid var(--wire);padding:6px;flex:1;text-align:center;">
+              <div style="width:30px;height:30px;border-radius:50%;border:4px solid var(--accent2);margin:0 auto 4px;"></div>
+              <div style="height:5px;background:var(--wire);border-radius:1px;width:40%;margin:0 auto;"></div>
+            </div>
+            <div style="border:1px solid var(--wire);padding:6px;flex:1;text-align:center;">
+              <div style="width:30px;height:30px;border-radius:50%;border:4px solid #2a8040;margin:0 auto 4px;"></div>
+              <div style="height:5px;background:var(--wire);border-radius:1px;width:40%;margin:0 auto;"></div>
+            </div>
+          </div>
+          <!-- History list -->
+          <div style="height:6px;width:55px;background:var(--wire);border-radius:1px;margin-bottom:5px;"></div>
+          <div class="wf-list-item"><div class="wf-rect" style="width:20px;height:20px;border-radius:50%;"></div><div style="flex:1;"><div class="wf-line" style="height:6px;width:70%;margin-bottom:2px;"></div><div class="wf-line" style="height:5px;width:40%;"></div></div><div style="height:6px;width:25px;background:var(--wire);border-radius:1px;"></div></div>
+          <div class="wf-list-item"><div class="wf-rect" style="width:20px;height:20px;border-radius:50%;"></div><div style="flex:1;"><div class="wf-line" style="height:6px;width:60%;margin-bottom:2px;"></div><div class="wf-line" style="height:5px;width:35%;"></div></div><div style="height:6px;width:25px;background:var(--wire);border-radius:1px;"></div></div>
+          <div class="wf-tab-bar">
+            <div class="wf-tab"><div class="wf-tab-icon"></div><div class="wf-tab-dot"></div></div>
+            <div class="wf-tab"><div class="wf-tab-icon"></div><div class="wf-tab-dot"></div></div>
+            <div class="wf-tab"><div class="wf-tab-icon active"></div><div class="wf-tab-dot active"></div></div>
+            <div class="wf-tab"><div class="wf-tab-icon"></div><div class="wf-tab-dot"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">Weekly · Monthly · 3-month views</div>
+    </div>
+
+  </div><!-- /wireframe-grid -->
+</section>
+
+<!-- ═══════════════════════════════════════════
+     05  DESIGN THINKING
+════════════════════════════════════════════ -->
+<section class="section" id="process">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">Design Thinking Process</h2>
+  <p class="section-desc">The five-stage Stanford d.school framework applied to FitFlow. Each stage informed the artifacts in this document.</p>
+
+  <div class="process-timeline">
+
+    <div class="process-step done">
+      <div class="process-num">Stage 01 — Empathise</div>
+      <div class="process-name">Understand the Human</div>
+      <p class="process-desc">We conducted 12 user interviews and 84 surveys to map pain points, motivations, and existing behaviours. We shadowed 3 participants through their actual fitness app usage to observe drop-off moments in context rather than relying on self-reported behaviour.</p>
+      <div class="process-output">
+        <span class="tag">12 Interviews</span>
+        <span class="tag">84 Surveys</span>
+        <span class="tag">3 Contextual observations</span>
+        <span class="tag outlined">Empathy maps</span>
+        <span class="tag outlined">Affinity diagram</span>
+      </div>
+    </div>
+
+    <div class="process-step done">
+      <div class="process-num">Stage 02 — Define</div>
+      <div class="process-name">Frame the Problem</div>
+      <p class="process-desc">From synthesis we arrived at a core problem statement: <em>"Fitness app users lose motivation not because they don't want to exercise, but because apps make missing a session feel like failure rather than a normal part of life."</em> Three personas were created to keep the design team grounded in real user needs.</p>
+      <div class="process-output">
+        <span class="tag">HMW statements</span>
+        <span class="tag">3 Personas</span>
+        <span class="tag outlined">Point-of-view statements</span>
+        <span class="tag outlined">Jobs-to-be-done</span>
+      </div>
+    </div>
+
+    <div class="process-step done">
+      <div class="process-num">Stage 03 — Ideate</div>
+      <div class="process-name">Generate Solutions</div>
+      <p class="process-desc">A 90-minute collaborative ideation session produced 140+ ideas via Crazy 8s sketching. Key breakthrough ideas: adaptive streak logic that preserves momentum after missed sessions, and a sub-90-second onboarding. Ideas were voted on and clustered into feature priorities for v1.</p>
+      <div class="process-output">
+        <span class="tag">Crazy 8s sketches</span>
+        <span class="tag">Feature priority matrix</span>
+        <span class="tag outlined">Dot voting</span>
+        <span class="tag outlined">RICE scoring</span>
+      </div>
+    </div>
+
+    <div class="process-step done">
+      <div class="process-num">Stage 04 — Prototype</div>
+      <div class="process-name">Build to Learn</div>
+      <p class="process-desc">Low-fidelity wireframes (this document) provide the structural foundation. Next step is mid-fidelity prototypes in Figma with interactive transitions to enable usability testing. The wireframes prioritise layout decisions and information hierarchy without the distraction of colour or final copy.</p>
+      <div class="process-output">
+        <span class="tag">User flows (3)</span>
+        <span class="tag">Wireframes (6 screens)</span>
+        <span class="tag outlined">Figma mid-fi (next)</span>
+        <span class="tag outlined">InVision prototype (next)</span>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="process-num">Stage 05 — Test</div>
+      <div class="process-name">Learn from Users</div>
+      <p class="process-desc">Planned: 5-person moderated usability tests using the mid-fidelity Figma prototype. Primary tasks to test: complete onboarding, start a workout, and recover from a missed session. Success metrics: task completion rate, time-on-task, and a post-session SUS score. Insights feed back into iteration cycles.</p>
+      <div class="process-output">
+        <span class="tag outlined">5-person usability test</span>
+        <span class="tag outlined">SUS score target ≥80</span>
+        <span class="tag outlined">Task completion ≥85%</span>
+        <span class="tag outlined">Heuristic evaluation</span>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <h2 class="sub">Design Principles Established</h2>
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-label">Principle 01</div>
+      <h3>Forgiveness over Punishment</h3>
+      <p>Every missed session is a reschedule opportunity, not a failure state. Streak logic rewards consistency, not perfection.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Principle 02</div>
+      <h3>Speed to Value</h3>
+      <p>The user must reach their first completed workout in under 3 minutes from install. Onboarding earns the right to ask more questions later.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Principle 03</div>
+      <h3>Visible Progress</h3>
+      <p>Every screen should remind the user how far they've come. Progress charts, streaks and milestones are first-class UI elements.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Principle 04</div>
+      <h3>Calm Clarity</h3>
+      <p>No anxiety-inducing gamification. No dark patterns. The tone is a supportive coach, not a surveillance system. Clean, focused UI.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const tabs = document.querySelectorAll('.nav-tab');
+    const map = { research: 0, personas: 1, flows: 2, wireframes: 3, process: 4 };
+    tabs[map[id]].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
